@@ -1,7 +1,14 @@
-import Square from '../components/Square'
+import React, {FunctionComponent} from "react";
+import {Square} from './Square'
 
-export default function Board({ xIsNext, squares, onPlay }) {
-  function handleClick(i) {
+type Props = {
+  xIsNext: boolean,
+  squares: Array<string>,
+  onPlay: Function,
+}
+
+export const Board: FunctionComponent<Props> = ({ xIsNext, squares, onPlay }) => {
+  function handleClick(i: number) {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -17,9 +24,9 @@ export default function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = 'Winner: ' + winner;
+    status = `Winner: ${winner}`;
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = `Next player: ${xIsNext ? 'X' : 'O'}`;
   }
 
   return (
@@ -44,7 +51,7 @@ export default function Board({ xIsNext, squares, onPlay }) {
   );
 }
 
-function calculateWinner(squares) {
+function calculateWinner(squares: any[]) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
